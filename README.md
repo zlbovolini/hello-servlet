@@ -19,3 +19,13 @@ mvn clean package
 ```
 
 3. O passo 2 deve ser repetido sempre que houver alguma alteração no código da aplicação.
+
+## Endereço da aplicação
+
+O Servlet deve estar disponível na seguinte URL:
+
+http://localhost:8080/gerenciador/hello
+
+E a página index.html na URL:
+
+http://localhost:8080/gerenciador/
