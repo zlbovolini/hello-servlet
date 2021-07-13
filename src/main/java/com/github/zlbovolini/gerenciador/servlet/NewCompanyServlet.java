@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.Optional;
 
-@WebServlet(urlPatterns = "/newCompany")
+@WebServlet(urlPatterns = "/novaEmpresa")
 public class NewCompanyServlet extends HttpServlet {
 
     @Override
