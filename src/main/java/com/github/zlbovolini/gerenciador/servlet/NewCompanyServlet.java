@@ -21,11 +21,12 @@ public class NewCompanyServlet extends HttpServlet {
 
         final PrintWriter writer = resp.getWriter();
 
-        optionalName.ifPresentOrElse(name -> {
-            writer.println("<html><body>Empresa " + name + " cadastrada com sucesso!</body></html>");
-        }, () -> {
-            writer.println("<html><body>Por favor, informe o nome da empresa.</body></html>");
-        });
+        optionalName.filter(name -> !name.isBlank())
+                .ifPresentOrElse(name -> {
+                    writer.println("<html><body>Empresa " + name + " cadastrada com sucesso!</body></html>");
+                }, () -> {
+                    writer.println("<html><body>Por favor, informe o nome da empresa.</body></html>");
+                });
 
     }
 }
