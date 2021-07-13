@@ -1,6 +1,5 @@
 package com.github.zlbovolini.gerenciador.servlet;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,14 +7,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Objects;
 import java.util.Optional;
 
 @WebServlet(urlPatterns = "/novaEmpresa")
 public class NewCompanyServlet extends HttpServlet {
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         Optional<String> optionalName = Optional.ofNullable(req.getParameter("name"));
 
