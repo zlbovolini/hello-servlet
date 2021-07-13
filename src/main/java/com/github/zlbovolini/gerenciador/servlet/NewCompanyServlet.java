@@ -13,7 +13,7 @@ import java.util.Optional;
 public class NewCompanyServlet extends HttpServlet {
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         Optional<String> optionalName = Optional.ofNullable(req.getParameter("name"));
 
