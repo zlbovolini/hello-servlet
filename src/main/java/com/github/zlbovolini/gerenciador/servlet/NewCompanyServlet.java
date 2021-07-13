@@ -21,6 +21,12 @@ public class NewCompanyServlet extends HttpServlet {
 
         optionalName.filter(name -> !name.isBlank())
                 .ifPresentOrElse(name -> {
+
+                    Company company = new Company(name);
+                    Database database = new Database();
+
+                    database.save(company);
+
                     writer.println("<html><body>Empresa " + name + " cadastrada com sucesso!</body></html>");
                 }, () -> {
                     writer.println("<html><body>Por favor, informe o nome da empresa.</body></html>");
