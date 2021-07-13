@@ -7,6 +7,13 @@ public class Database {
 
     private static final List<Company> companies = new ArrayList<>();
 
+    static {
+        companies.addAll(List.of(
+                new Company("Alura"),
+                new Company("Caelum"))
+        );
+    }
+
     public void save(Company company) {
         companies.add(company);
     }
