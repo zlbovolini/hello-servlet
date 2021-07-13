@@ -29,3 +29,19 @@ http://localhost:8080/gerenciador/hello
 E a página index.html na URL:
 
 http://localhost:8080/gerenciador/
+
+## Como aplicar as alterações sem reiniciar o servidor Tomcat
+
+Localize o arquivo **context.xml** dentro da pasta **conf** do Tomcat. E realize as seguintes alterações:
+
+1. Na tag Context adicione o atributo reloadable como valor "true"
+
+````xml
+<Context reloadable="true">
+````
+
+2. Dentro da tag Context adicione a seguinte tag:
+
+```xml
+<WatchedResource>WEB-INF/**</WatchedResource>
+```
