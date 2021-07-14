@@ -13,22 +13,23 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-@WebServlet(urlPatterns = "/novaEmpresa")
-public class NewCompanyServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/alteraEmpresa")
+public class EditCompanyServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Optional<String> optionalId = Optional.ofNullable(req.getParameter("id"));
         Optional<String> optionalName = Optional.ofNullable(req.getParameter("name"));
         Optional<String> optionalFoundedAt = Optional.ofNullable(req.getParameter("foundedAt"));
 
-        boolean isValid = Stream.of(optionalName, optionalFoundedAt).flatMap(Optional::stream).noneMatch(String::isBlank);
+        boolean isValid = Stream.of(optionalId, optionalName, optionalFoundedAt).flatMap(Optional::stream).noneMatch(String::isBlank);
 
         if (!isValid) {
-           resp.sendRedirect("formNovaEmpresa.jsp");
-           return;
+            resp.sendRedirect("formAlteraEmpresa.jsp");
+            return;
         }
 
+        String paramId = optionalId.get();
         String name = optionalName.get();
         String foundedAt = optionalFoundedAt.get();
 
@@ -40,13 +41,12 @@ public class NewCompanyServlet extends HttpServlet {
             throw new ServletException(e);
         }
 
-        Company company = new Company(name, foundedAtDate);
+        int id = Integer.parseInt(paramId);
+
+        Company company = new Company(id, name, foundedAtDate);
         Database database = new Database();
 
-        database.save(company);
-
-        req.setAttribute("name", company.getName());
-        req.setAttribute("foundedAt", company.getFoundedAt());
+        database.edit(company);
 
         resp.sendRedirect("listaEmpresas");
     }
