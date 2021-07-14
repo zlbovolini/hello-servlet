@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/listaEmpresas")
-public class ShowCompanyServlet extends HttpServlet {
+public class ListCompanyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
