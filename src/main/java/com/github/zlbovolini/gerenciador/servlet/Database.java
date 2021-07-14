@@ -7,11 +7,12 @@ import java.util.List;
 public class Database {
 
     private static final List<Company> companies = new ArrayList<>();
+    private static int idSeq = 0;
 
     static {
         companies.addAll(List.of(
-                new Company("Alura", new Date()),
-                new Company("Caelum", new Date()))
+                new Company(idSeq, "Alura", new Date()),
+                new Company(++idSeq, "Caelum", new Date()))
         );
     }
 
@@ -21,5 +22,12 @@ public class Database {
 
     public List<Company> findAll() {
         return companies;
+    }
+
+    public void delete(int id) {
+        companies.stream()
+                .filter(company -> company.getId() == id)
+                .findAny()
+                .ifPresent(companies::remove);
     }
 }

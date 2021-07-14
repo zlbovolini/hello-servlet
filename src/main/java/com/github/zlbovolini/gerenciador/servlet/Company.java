@@ -16,6 +16,11 @@ public class Company {
         this.foundedAt = foundedAt;
     }
 
+    public Company(Integer id, String name, Date foundedAt) {
+        this(name, foundedAt);
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }
