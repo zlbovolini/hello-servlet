@@ -30,4 +30,20 @@ public class Database {
                 .findAny()
                 .ifPresent(companies::remove);
     }
+
+    public Company findById(int id) {
+        return companies.stream()
+                .filter(company -> company.getId() == id)
+                .findAny().orElse(new Company());
+    }
+
+    public void edit(Company company) {
+        companies.stream()
+                .filter(e -> e.getId() == company.getId())
+                .findAny()
+                .ifPresent(e -> {
+                    companies.remove(e);
+                    companies.add(company);
+                });
+    }
 }
