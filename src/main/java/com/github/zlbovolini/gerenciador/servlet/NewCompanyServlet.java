@@ -45,10 +45,10 @@ public class NewCompanyServlet extends HttpServlet {
             req.setAttribute("name", company.getName());
             req.setAttribute("foundedAt", company.getFoundedAt());
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("novaEmpresaCriada.jsp");
-            dispatcher.forward(req, resp);
-        }
+            resp.sendRedirect("listaEmpresas");
 
+            return;
+        }
         resp.sendRedirect("formNovaEmpresa.jsp");
     }
 }
