@@ -1,6 +1,7 @@
 package com.github.zlbovolini.gerenciador.servlet;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Database {
@@ -9,8 +10,8 @@ public class Database {
 
     static {
         companies.addAll(List.of(
-                new Company("Alura"),
-                new Company("Caelum"))
+                new Company("Alura", new Date()),
+                new Company("Caelum", new Date()))
         );
     }
 

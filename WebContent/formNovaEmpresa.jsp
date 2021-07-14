@@ -15,6 +15,10 @@
             <input type="text" name="name"/>
         </div>
         <div>
+            <label>Data de abertura:</label>
+            <input type="text" name="foundedAt" />
+        </div>
+        <div>
             <input type="submit">
         </div>
     </form>
