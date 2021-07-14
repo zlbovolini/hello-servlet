@@ -31,5 +31,7 @@ public class NewCompanyServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("novaEmpresaCriada.jsp");
             dispatcher.forward(req, resp);
         }
+
+        resp.sendRedirect("formNovaEmpresa.jsp");
     }
 }
