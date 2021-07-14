@@ -1,6 +1,5 @@
 package com.github.zlbovolini.gerenciador.servlet;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,32 +22,32 @@ public class NewCompanyServlet extends HttpServlet {
         Optional<String> optionalName = Optional.ofNullable(req.getParameter("name"));
         Optional<String> optionalFoundedAt = Optional.ofNullable(req.getParameter("foundedAt"));
 
-       boolean isValid = Stream.of(optionalName, optionalFoundedAt).flatMap(Optional::stream).noneMatch(String::isBlank);
+        boolean isValid = Stream.of(optionalName, optionalFoundedAt).flatMap(Optional::stream).noneMatch(String::isBlank);
 
-        if (isValid) {
-            String name = optionalName.get();
-            String foundedAt = optionalFoundedAt.get();
-
-            Date foundedAtDate;
-            try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                foundedAtDate = dateFormat.parse(foundedAt);
-            } catch (ParseException e) {
-                throw new ServletException(e);
-            }
-
-            Company company = new Company(name, foundedAtDate);
-            Database database = new Database();
-
-            database.save(company);
-
-            req.setAttribute("name", company.getName());
-            req.setAttribute("foundedAt", company.getFoundedAt());
-
-            resp.sendRedirect("listaEmpresas");
-
-            return;
+        if (!isValid) {
+           resp.sendRedirect("formNovaEmpresa.jsp");
+           return;
         }
-        resp.sendRedirect("formNovaEmpresa.jsp");
+
+        String name = optionalName.get();
+        String foundedAt = optionalFoundedAt.get();
+
+        Date foundedAtDate;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            foundedAtDate = dateFormat.parse(foundedAt);
+        } catch (ParseException e) {
+            throw new ServletException(e);
+        }
+
+        Company company = new Company(name, foundedAtDate);
+        Database database = new Database();
+
+        database.save(company);
+
+        req.setAttribute("name", company.getName());
+        req.setAttribute("foundedAt", company.getFoundedAt());
+
+        resp.sendRedirect("listaEmpresas");
     }
 }
